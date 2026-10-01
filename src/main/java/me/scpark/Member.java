@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Entity
-
-
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +17,8 @@ public class Member {
     private  Long id;
     @Column(name="name",nullable = false)
     private String name;
+
+    public Member(String name) {
+        this.name = name;
+    }
 }
