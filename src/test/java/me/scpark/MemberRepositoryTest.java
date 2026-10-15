@@ -67,4 +67,75 @@ class MemberRepositoryTest {
     }
 
 
+    @Sql("/insert-members.sql")
+    @DisplayName("테이블 member 에서 id가 3인 레코드 삭제하기")
+    @Test
+    public void deleteById3() {
+        //given
+
+        //when
+        memberRepository.deleteById(3L);
+
+        //then
+        List<Member> members = memberRepository.findAll();
+        assertThat(members.size()).isEqualTo(2);
+
+    }
+
+    @Sql("/insert-members.sql")
+    @DisplayName("테이블 member의 모든 레코드 삭제하기")
+    @Test
+    public void deleteAll() {
+        //given
+        List<Member> members = memberRepository.findAll();
+        assertThat(members.size()).isEqualTo(3);
+
+        //when
+        memberRepository.deleteAll();
+
+        //then
+        members = memberRepository.findAll();
+        assertThat(members.size()).isZero();
+
+    }
+
+    @DisplayName("테이블 member name이'A','B'인 레코드를 한 번에 삽입하기")
+    @Test
+    public void saveMembers() {
+        //given
+        List<Member> members = List.of(new Member("A"),new Member("B"));
+
+
+        //when
+        memberRepository.saveAll(members);
+
+        //then
+        members = memberRepository.findAll();
+        assertThat(members.size()).isEqualTo(2);
+
+    }
+
+    @Sql("/insert-members.sql")
+    @DisplayName("변경감지 기능을 통해 Id가 2인 레코드의 이름을 'B','BB'로 변경하기")
+    @Test
+    public void update() {
+        Member member = memberRepository.findById(2L).get();
+
+
+        member.setName("BB");
+
+
+        member = memberRepository.findById(2L).get();
+        assertThat(member.getName()).isEqualTo("BB");
+
+
+
+    }
+
+
+
+
+
+
+
 }
