@@ -4,6 +4,7 @@ package me.scpark.service;
 import lombok.RequiredArgsConstructor;
 import me.scpark.domain.Article;
 import me.scpark.dto.AddArticleRequest;
+import me.scpark.dto.UpdateArticleRequest;
 import me.scpark.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,13 @@ public class BlogService {
     public void deleteArticle(Long id) {
         blogRepository.deleteById(id);
     }
+
+    public Article updateArticle(Long id, UpdateArticleRequest request) {
+        Article article = findById(id);
+        article.update(request.getTitle(), request.getContent());
+        return blogRepository.save(article);
+    }
+
 
 }
 

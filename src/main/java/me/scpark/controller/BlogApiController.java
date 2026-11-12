@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import me.scpark.domain.Article;
 import me.scpark.dto.AddArticleRequest;
 import me.scpark.dto.ArticleResponse;
+import me.scpark.dto.UpdateArticleRequest;
 import me.scpark.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,14 @@ public class BlogApiController {
     public ResponseEntity<Void> deleteArticle(@PathVariable Long id) {
         blogService.deleteArticle(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<ArticleResponse> updateArticle(@PathVariable Long id,
+                                                         @RequestBody UpdateArticleRequest req) {
+        Article article = blogService.updateArticle(id,req);
+        return ResponseEntity.ok()
+                .body(new ArticleResponse(article));
     }
 
 
