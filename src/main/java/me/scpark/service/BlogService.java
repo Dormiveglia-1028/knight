@@ -1,6 +1,7 @@
 package me.scpark.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import me.scpark.domain.Article;
 import me.scpark.dto.AddArticleRequest;
@@ -32,11 +33,13 @@ public class BlogService {
         blogRepository.deleteById(id);
     }
 
+    @Transactional
     public Article updateArticle(Long id, UpdateArticleRequest request) {
         Article article = findById(id);
         article.update(request.getTitle(), request.getContent());
         return blogRepository.save(article);
     }
+
 
 
 }
