@@ -15,10 +15,7 @@
          <p th:text="${student.age}">99</p>
          <p>대구</p>
          <ul>
-             <li th:each="hobby, status : ${student.hobbies}">
-                 <span th:text="${hobby}">운동</span>
-                 <span th:if="${status.first}">(대표취미)</span>
-             </li>
+             <li th:each="hobby : ${student.hobbies}" th:text="${hobby}"></li>
          </ul>
      </div>
 </body>
