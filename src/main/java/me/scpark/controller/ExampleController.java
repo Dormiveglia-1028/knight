@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,9 @@ public class ExampleController {
         hobbies.add("eat");
         person.setHobbies(hobbies);
         model.addAttribute("student",person);
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("blogId",2);
+
         return "test2";
     }
 }

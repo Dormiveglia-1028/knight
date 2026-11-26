@@ -1,0 +1,5 @@
+INSERT INTO article(title,content) values ('1','1')
+INSERT INTO article(title,content) values ('2','2')
+INSERT INTO article(title,content) values ('3','3')
+INSERT INTO article(title,content) values ('4','4')
+INSERT INTO article(title,content) values ('5','5')
